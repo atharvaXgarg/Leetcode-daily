@@ -1,13 +1,23 @@
 class Solution {
     public List<Integer> findMissingElements(int[] nums) {
-        Arrays.sort(nums);
-        ArrayList<Integer> li=new ArrayList<>();
-        int a=0;
-        for(int i=nums[0] ; i<nums[nums.length-1]; i++){
-            if(nums[a]!=i){ li.add(i); continue;}
-                a++;
-            
+        ArrayList<Integer> al = new ArrayList<>();
+        int max = 0, min = 100;
+        int[] arr = new int[100];
+        // find min and max element and fill counter array
+        for (int i = 0; i < nums.length; i++) {
+            arr[nums[i] - 1] = 1;
+            if (nums[i] < min) {
+                min = nums[i];
+            }
+            if (nums[i] > max) {
+                max = nums[i];
+            }
         }
-        return li;
+        for (int i = min; i < max; i++) {
+            if (arr[i - 1] == 0) {
+                al.add(i);
+            }
+        }
+        return al;
     }
 }
