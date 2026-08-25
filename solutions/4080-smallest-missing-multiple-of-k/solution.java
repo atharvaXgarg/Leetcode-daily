@@ -1,19 +1,21 @@
 class Solution {
-    public boolean search(int []nums, int k){
-        for(int i=0; i<nums.length ;i++){
-            if(nums[i]==k) return true;
-        }
-        return false;
-    }
-    public int missingMultiple(int[] nums, int k) {
-        int a=1,result;
-        while(true){
-            if(!(search(nums,k*a))){
-                result=k*a; break;
-            } a++;
-        }
-        return result;
+
     
+
+    public int missingMultiple(int[] nums, int k) {
+      HashMap <Integer,Boolean>hm=new HashMap<>();
+      for(int i=0;i<nums.length;i++){
+        if(nums[i]%k==0){
+            hm.put(nums[i]/k,true);
+        }
+      }
+      for(int i=1;i<=nums.length;i++){
+        if(hm.getOrDefault(i,false)==false){
+            return k*i;
+        }
+      }
+
+       return k*(nums.length+1);
 
     }
 }
